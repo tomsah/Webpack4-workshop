@@ -1,5 +1,6 @@
 import nav from "./nav";
-import { footer } from "./footer";
+// import { footer } from "./footer";
+const getFooter = () => import("./footer")
 import makeButton from "./button";
 import { makeColorStyle } from "./button-styles";
 import makeImage from "./image";
@@ -10,7 +11,13 @@ import buttonStyles from "./button.css";
 const image = makeImage(imageUrl);
 const button = makeButton("Yay! A Button!");
 button.style = makeColorStyle("cyan");
-
 document.body.appendChild(button);
+
+
+button.addEventListener('click', e => {
+  getFooter().then(module => {
+    document.body.appendChild(module.footer);
+  })
+})
 document.body.appendChild(image);
-document.body.appendChild(footer);
+
